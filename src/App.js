@@ -4,7 +4,7 @@ import axios from 'axios'
 import Pagination from './Pagination';
 
 function App() {
-  const [pokemon, setPokemon] = useState([])
+  const [pokemon, setPokemon, setPokemon2] = useState([])
   const [currentPageURL, setCurrentPageUrl] = useState("https://pokeapi.co/api/v2/pokemon")
   const [nextPageUrl, setNextPageUrl] = useState()
   const [prevPageUrl, setPrevPageUrl] = useState()
@@ -19,7 +19,8 @@ function App() {
       setLoading(false)
       setNextPageUrl(res.data.next)
       setPrevPageUrl(res.data.previous)
-      setPokemon(res.data.results.map(p=> p.name))
+      setPokemon(res.data.results.map(p=> p.name)  )
+      // setPokemon(res.data.results.map(p=> p.url)  )
     })
 
     return() => cancel()
@@ -40,6 +41,7 @@ function App() {
   return (
     <>
     <PokemonList pokemon={pokemon} />
+
     <Pagination
       gotoNextPage={nextPageUrl ? gotoNextPage : null}
       gotoPrevPage={prevPageUrl ? gotoPrevPage : null}
